@@ -14,7 +14,7 @@ Book::Book(const string &title, const string &author, const string &isbn)
 
 // Getters
 string Book::getTitle() const { return title; }
-string Book::getAuthor() const { return author; };
+string Book::getAuthor() const { return author; }
 string Book::getISBN() const { return isbn; }
 bool Book::getAvailability() const { return isAvailable; }
 string Book::getBorrowerName() const { return borrowerName; }
@@ -58,9 +58,19 @@ void Book::fromFileFormat(const string &line)
     stringstream ss(line);
     string token;
 
-    getLine(ss, title, '|');
-    getLine(ss, author, '|');
-    getLine(ss, isbn, '|');
-    getLine(ss, to_string(isAvailable) '|');
-    getLine(ss, borrowerName, '|');
+    getline(ss, title, '|');
+    getline(ss, author, '|');
+    getline(ss, isbn, '|');
+    string available;
+    getline(ss, available, '|');
+    if (available == "true")
+    {
+        isAvailable = true;
+    }
+    else
+    {
+        isAvailable = false;
+    }
+
+    getline(ss, borrowerName, '|');
 }
